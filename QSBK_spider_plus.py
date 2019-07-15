@@ -2,8 +2,8 @@
 #导入需要使用的模块
 #import itertools  
 import urllib
-import sys,io
-sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding='utf-8')#为了防止有时候输出产生中文乱码的问题
+#import sys,io
+#sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding='utf-8')#为了防止有时候输出产生中文乱码的问题
 import requests
 from lxml import etree
 import json
@@ -12,13 +12,14 @@ from docx.shared import Inches
 from docx.oxml.ns import qn
 from docx.shared import Pt
 import docx.image
+import os,shutil
 class QSBK_aoto_spider():
     def __init__(self):        
         #url 和 User-Agent
         self.url = "https://www.qiushibaike.com/imgrank/page/{}/"#爬取含有图片的糗事百科
         self.headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36"}
     def get_url_list(self):
-        url_list=[self.url.format(i) for i in range(1,14)]
+        url_list=[self.url.format(i) for i in range(1,3)]
         return url_list
     def parse_url(self,url):        
         print("正在处理：",url)
@@ -49,9 +50,8 @@ class QSBK_aoto_spider():
         return piccc,content_list
     def save_info(self,content_list,piccc):# 保存数据
         global count_1,count_2,count_3
-
         for picsss in piccc:
-            urllib.request.urlretrieve(picsss,'D:/code/QSBK_aoto_spider/'+str(count_1)+'.jpg')
+            urllib.request.urlretrieve(picsss,Path+'/pictures/'+str(count_1)+'.jpg')
             count_1+=1
         for content in content_list:
             doc.add_paragraph(json.dumps(str(count_2)))
@@ -59,7 +59,7 @@ class QSBK_aoto_spider():
             doc.add_paragraph("**********************************************")
             doc.add_paragraph("**********************************************\n")
             try:
-                doc.add_picture('D:/code/QSBK_aoto_spider/'+str(count_3)+'.jpg',width = Inches(6.0))    
+                doc.add_picture(Path+'/pictures/'+str(count_3)+'.jpg',width = Inches(6.0))
                 doc.add_paragraph("\n")
                 doc.add_paragraph("**********************************************")
                 doc.add_paragraph("**********************************************\n")
@@ -67,7 +67,7 @@ class QSBK_aoto_spider():
             except docx.image.exceptions.UnrecognizedImageError:
                 doc.add_picture('D:/code/zomkey.jpg',width = Inches(1.25))
                 doc.add_paragraph('图片好像不见了哦~')                 
-            doc.save('D:/code/QSBK_aoto_spider.docx')
+            doc.save(Path+'/contents/QSBK_aoto_spider.docx')
             count_2+=1
             count_3+=1
         print("保存成功")         
@@ -82,15 +82,24 @@ class QSBK_aoto_spider():
             #4.保存
             self.save_info(content_list,piccc)
 if __name__ == '__main__':
-    #实例化方法
     count_1=1
     count_2=1
     count_3=1
+    #判断是否已存在目录Path，如果存在则删除
+    Path='D:/code/QSBK_auto_spider_plus'
+    if os.path.exists(Path):
+        shutil.rmtree(Path)
+    #创建所需目录
+    os.makedirs(Path)
+    os.mkdir(Path+'/pictures')
+    os.mkdir(Path+'/contents')
+    #docx文件初始化
     doc = Document()
     doc.styles['Normal'].font.size=Pt(18)
     doc.styles['Normal'].font.name = u'Times New Roman'
     doc.styles['Normal']._element.rPr.rFonts.set(qn('w:eastAsia'), u'宋体')
     doc.add_heading(u"糗事百科热门精选-by Zomkey's Python_Spider",0)
+    # 实例化方法
     QSBK = QSBK_aoto_spider()
     QSBK.run()
 
