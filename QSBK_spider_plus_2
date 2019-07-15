@@ -49,10 +49,7 @@ class QSBK_aoto_spider():
         return piccc,content_list
     def save_info(self,content_list,piccc):# 保存数据
         global count_1,count_2,count_3
-        doc.styles['Normal'].font.size=Pt(18)
-        doc.styles['Normal'].font.name = u'Times New Roman'
-        doc.styles['Normal']._element.rPr.rFonts.set(qn('w:eastAsia'), u'宋体')
-        doc.add_heading(u"糗事百科热门精选-by Zomkey's Python_Spider",0)
+
         for picsss in piccc:
             urllib.request.urlretrieve(picsss,'D:/code/QSBK_aoto_spider/'+str(count_1)+'.jpg')
             count_1+=1
@@ -84,13 +81,17 @@ class QSBK_aoto_spider():
             piccc,content_list = self.get_info(html_str)            
             #4.保存
             self.save_info(content_list,piccc)
-#if __name__ == '__main__':
+if __name__ == '__main__':
     #实例化方法
-count_1=1
-count_2=1
-count_3=1
-doc = Document()
-QSBK = QSBK_aoto_spider()
-QSBK.run()
+    count_1=1
+    count_2=1
+    count_3=1
+    doc = Document()
+    doc.styles['Normal'].font.size=Pt(18)
+    doc.styles['Normal'].font.name = u'Times New Roman'
+    doc.styles['Normal']._element.rPr.rFonts.set(qn('w:eastAsia'), u'宋体')
+    doc.add_heading(u"糗事百科热门精选-by Zomkey's Python_Spider",0)
+    QSBK = QSBK_aoto_spider()
+    QSBK.run()
 
 
