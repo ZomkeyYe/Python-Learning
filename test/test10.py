@@ -1,3 +1,4 @@
+# python打砖块游戏
 import pygame
 from pygame.locals import *
 import sys,random,time,math

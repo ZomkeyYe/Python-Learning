@@ -1,3 +1,4 @@
+# 递归计算阶乘
 def jiec(n):
    if n ==1 :
       return 1

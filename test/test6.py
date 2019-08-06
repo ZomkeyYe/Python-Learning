@@ -1,3 +1,4 @@
+# 海龟画图
 import turtle
 myTurtle = turtle.Turtle()
 myWin = turtle.Screen()

@@ -1,3 +1,4 @@
+# 二分查找
 def binarySearch(alist, item):
     first = 0
     last = len(alist)-1

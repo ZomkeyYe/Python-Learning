@@ -1,3 +1,4 @@
+# 99乘法表
 class nnn():
    def mmm(self):
       for i in range(1,10):
