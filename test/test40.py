@@ -7,7 +7,7 @@ def mmm(l,r):
         x2 = lis[-1] + i
         lis.append(x2)
     count = 0
-    print(lis)
+    # print(lis)
     for i in lis:
         if i%3 == 0:
             count+=1
