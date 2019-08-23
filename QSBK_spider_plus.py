@@ -19,7 +19,9 @@ class QSBK_aoto_spider():
         self.url = "https://www.qiushibaike.com/imgrank/page/{}/"#爬取含有图片的糗事百科
         self.headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36"}
     def get_url_list(self):
+
         url_list=[self.url.format(i) for i in range(1,4)]
+
         return url_list
     def parse_url(self,url):        
         print("正在处理：",url)
