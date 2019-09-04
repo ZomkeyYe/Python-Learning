@@ -102,5 +102,3 @@ if __name__ == '__main__':
     # 实例化方法
     QSBK = QSBK_aoto_spider()
     QSBK.run()
-
-
