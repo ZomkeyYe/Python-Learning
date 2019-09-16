@@ -1,25 +1,18 @@
-def migonggong(N,M,Q):
-    while i < N and j < M:
-        if i==0 and j==0:
-            if Q[i][j]==0:
-                return 0
-        if Q[i][j] == 9:
-            return 1
-        if Q[i][j] == 1:  
-
-           
-    return 0
+def zixulie(lis):
+    if lis == []:
+        return 0
+    N = len(lis)
+    dp=[1]*N
+    for i in range(N):
+        for j in range(i):
+            if lis[i] >= lis[j]:
+                dp[i] = max(dp[i],dp[j]+1)
+    return max(dp)
 if __name__ == '__main__':
     while True:
         try:
-            N,M = map(int,input().split())
-            Q = []
-            for i in range(N):
-                Q.append(list(map(int,input().split())))
-            if migonggong(N,M,Q):
-                print("1")
-            else:
-                print("0")
-        except Exception as e:
-            print(e.args)
+            N = int(input())
+            lis = list(map(int,input().split()))
+            print(N-zixulie(lis))
+        except:
             break

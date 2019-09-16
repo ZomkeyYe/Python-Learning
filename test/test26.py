@@ -8,4 +8,4 @@ def quickSort(arr):
     right = [value for value in arr if value > pivot]
     return quickSort(left)+middle+quickSort(right)
 
-print(quickSort([3,1,5,7,12,2,4]))
+print(quickSort([1,1]))
