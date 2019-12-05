@@ -108,17 +108,6 @@ if __name__ == '__main__':
             lis = [8,0,0]
             way = [[8,0,0]]
             his = [[8,0,0]]
-            # print(his)
-            # x1tox3(lis)
-            # print(way)
-            # x1tox2(lis)
-            # x2tox3(lis)
-            # print(way)
-            # x3tox2(lis)
-            # print(way)
-            # x1tox3(lis)
-            # print(way)
-            # print(his)
             while (not judge(way)):
                 # print(lis)
                 print(way,"---",his)
